@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfCarDal : ICarDal
+    public class EfColorDal : IColorDal
     {
-        public void Add(Car entity)
+        public void Add(Color entity)
         {
-            using (Car_DbContext context=new Car_DbContext())
+            using (Car_DbContext context =new Car_DbContext())
             {
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
@@ -21,9 +21,9 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public void Delete(Car entity)
+        public void Delete(Color entity)
         {
-            using (Car_DbContext context = new Car_DbContext())
+            using (Car_DbContext context=new Car_DbContext())
             {
                 var deletedEntity = context.Entry(entity);
                 deletedEntity.State = EntityState.Deleted;
@@ -31,30 +31,30 @@ namespace DataAccess.Concrete.EntityFramework
             }
         }
 
-        public Car Get(Expression<Func<Car, bool>> filter)
+        public Color Get(Expression<Func<Color, bool>> filter)
         {
             using (Car_DbContext context=new Car_DbContext())
             {
-                return context.Set<Car>().SingleOrDefault(filter);
+                return context.Set<Color>().SingleOrDefault(filter);
             }
         }
 
-        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        public List<Color> GetAll(Expression<Func<Color, bool>> filter = null)
         {
             using (Car_DbContext context=new Car_DbContext())
             {
                 return filter == null
-                    ? context.Set<Car>().ToList()
-                    : context.Set<Car>().Where(filter).ToList();
+                    ? context.Set<Color>().ToList()
+                    : context.Set<Color>().Where(filter).ToList();
             }
         }
 
-        public void Update(Car entity)
+        public void Update(Color entity)
         {
-            using (Car_DbContext context = new Car_DbContext())
+            using (Car_DbContext context=new Car_DbContext())
             {
-                var updatedEntity = context.Entry(entity);
-                updatedEntity.State = EntityState.Modified;
+                var deletedEntity = context.Entry(entity);
+                deletedEntity.State = EntityState.Modified;
                 context.SaveChanges();
             }
         }
