@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Business.Abstract;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -29,10 +30,9 @@ namespace Business.Concrete
             return new SuccessDataResult<Customer>(_customerDal.Get(c => c.Id == id));
         }
 
-
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Add(Customer customer)
         {
-            ValidationTool.Validate(new CustomerValidator(),customer);
 
             _customerDal.Add(customer);
             return new SuccessResult();
